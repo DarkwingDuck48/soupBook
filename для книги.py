@@ -54,7 +54,7 @@ class DeletedByMask:
                 except NotADirectoryError:
                     continue
 
-
+# Hi
 if __name__ == "__main__":
     path = input("Type path to directory - ")
     while not checks.checkpath(path):
