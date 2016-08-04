@@ -17,9 +17,8 @@ for direct in workdir:
         links = soup.find_all("a")
         images = soup.find_all("img")
         print(path_to_file)
-#        for link in links:
-#            if re.match(pattern,link['href']):
-#                link['href'] = 'Files/background/white.gif'
+        for link in links:
+            print(link.string)
         for image in images:
             if image['src'].endswith(pattern_book):
                 image['src'] = "Files/book/turnbook.gif"
