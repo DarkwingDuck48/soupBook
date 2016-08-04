@@ -3,7 +3,7 @@ import stat
 import re
 import checks
 
-class DeletedByMask:
+class DeleteByMask:
     def __init__(self, path, todelete):
         self.todelete = todelete
         self.path = path
