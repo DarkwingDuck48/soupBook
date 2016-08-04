@@ -45,7 +45,6 @@ for direct in workdir:
             folder = direct.split(".")
             #0073_Геодезия_6_1
             filename = image['src'].split("/")
-            todebug = "Files/pages/"+folder[0][14:]+"/"+filename[-1]
             image['src'] = "Files/pages/"+folder[0][14:]+"/"+filename[-1]
             #print(image['src'])
     file2 = open(path_to_file, "w+", encoding='utf-8')
