@@ -1,9 +1,8 @@
-import os,stat
+import os, stat
 from bs4 import BeautifulSoup
 
 
-pattern_bg = "white.gif"
-path_work = "D:\Книга\Example"
+path_work = "D:\Документы\Книга_Геодезия_Дьяков"
 workdir = [direct for direct in os.listdir(path_work) if os.path.isfile(path_work+"\\"+direct)]
 print(workdir)
 for direct in workdir:
@@ -43,10 +42,8 @@ for direct in workdir:
             image['src'] = "Files/hand/right.gif"
         else:
             folder = direct.split(".")
-            #0073_Геодезия_6_1
             filename = image['src'].split("/")
-            image['src'] = "Files/pages/"+folder[0][14:]+"/"+filename[-1]
-            #print(image['src'])
+            image['src'] = "Files/pages/"+folder[0][14:].strip()+"/"+filename[-1].strip()
     file2 = open(path_to_file, "w+", encoding='utf-8')
     file2.write(soup.prettify())
     file2.close()
