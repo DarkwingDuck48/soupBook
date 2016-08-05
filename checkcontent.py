@@ -1,8 +1,8 @@
 import os
 from bs4 import BeautifulSoup
 
-# path_to_file = "D:\Документы\Книга_Геодезия_Дьяков"+"\\"+"0003_Содержание.htm"
-path_work = "D:\Документы\Книга_Геодезия_Дьяков"
+
+path_work = input('Type path to directory - ')
 work_directory = [direct for direct in os.listdir(path_work) if os.path.isfile(path_work + "\\" + direct)]
 for file in work_directory:
     path_to_file = path_work + "\\" + file
@@ -17,13 +17,13 @@ for file in work_directory:
     print("-----------------------------------------------------------")
     print("Checking links in file {}...".format(path_to_file))
     for link in links:
-        check_path = "D:\Документы\Книга_Геодезия_Дьяков" + "\\" + link["href"]
+        check_path = path_work + "\\" + link["href"]
         if not (os.path.isfile(check_path)):
             i += 1
             error_links.append(link["href"])
     print("Checking images in file {} ...".format(path_to_file))
     for image in images:
-        check_path = "D:\Документы\Книга_Геодезия_Дьяков" + "\\" + image["src"]
+        check_path = path_work + "\\" + image["src"]
         if not(os.path.isfile(check_path)):
             x += 1
             error_images.append(image["src"])

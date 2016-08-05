@@ -1,18 +1,33 @@
 import os
 import stat
-import re
 import checks
 
 class DeleteByMask:
     def __init__(self, path, todelete):
+        """
+
+        :param path: путь к целевой директории
+        :param todelete: имена файлов с расширениями для удаления
+        """
         self.todelete = todelete
+        # Проверка имени файла на соответствие образцу - имяфайла.расширение
+        if checks.checkfilename(self.todelete) != "0":
+            raise Exception("You have {} wrong filenames".format(len(checks.checkfilename(self.todelete))))
+        else:
+            print("Filenames is valid")
         self.path = path
+        if not(checks.checkpath(self.path)):
+            raise Exception("This directory doesn't exist! Check it!")
         self.withchange = 0
         self.withoutchange = 0
         self.error_permission = 0
         self.error_notadirectory = 0
 
     def deletefiles(self):
+        """
+        Функция удаления файлов в каталоге по введеному пути и с введенными именами
+        :return: True по окончанию действия
+        """
         workdir = os.listdir(self.path)
         for direct in workdir:
             path_2 = self.path + '\\' + direct
@@ -38,8 +53,13 @@ class DeleteByMask:
                             self.error_permission += 1
                             print('No access to file ' + path_2 + '\\' + file)
                             continue
+        return True
 
     def cleandir(self):
+        """
+        Очищает выбранную директорию от пустых папок
+        :return: True по окончанию действия
+        """
         workdir = os.listdir(self.path)
         for direct in workdir:
             path_2 = self.path + '\\' + direct
@@ -53,8 +73,9 @@ class DeleteByMask:
                         print("Remove " + path_2)
                 except NotADirectoryError:
                     continue
+        return True
 
-# Hi
+
 if __name__ == "__main__":
     path = input("Type path to directory - ")
     while not checks.checkpath(path):
